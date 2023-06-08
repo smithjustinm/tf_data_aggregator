@@ -24,11 +24,11 @@ module "aks" {
     resource_group_name = var.resource_group_name
 }
 
-# module "postgres" {
-#     source = "./modules/postgres"
-#     location = var.azure_location
-#     resource_group_name = var.resource_group_name
-# }
+module "postgres" {
+    source = "./modules/postgres"
+    location = var.azure_location
+    resource_group_name = var.resource_group_name
+}
 
 module "keyvault" {
   source                      = "./modules/keyvault"
