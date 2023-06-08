@@ -1,22 +1,25 @@
-name: Run Azure Login with OpenID Connect
-on: [push]
+name: Authenticate Azure
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 
-permissions:
-      id-token: write
-      contents: read
-      
-jobs: 
-  build-and-deploy:
+jobs:
+  publish:
     runs-on: ubuntu-latest
     steps:
-    - name: 'Az CLI login'
-      uses: azure/login@v1
-      with:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: 'Log into Azure using github secret AZURE_CREDENTIALS'
+        uses: Azure/login@v1
+        with:
           tenant-id: ${{ secrets.TENANT_ID }}
           subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
-  
-    - name: 'Run Azure CLI commands'
-      run: |
+          enable-AzPSSession: true
+
+      - name: 'Run az commands'
+        run: |
           az account show
           az group list
-          pwd 
