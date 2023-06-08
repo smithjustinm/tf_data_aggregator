@@ -9,3 +9,13 @@ variable "azure_location" {
   description = "Azure Location"
   default     = "West US 2"
 }
+
+variable "subscription_id" {
+  type        = string
+  description = "Azure Subscription ID"
+}
+
+variable "tenant_id" {
+  type        = string
+  description = "Azure Tenant ID"
+}
